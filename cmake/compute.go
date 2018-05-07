@@ -26,6 +26,10 @@ func (m *MessageCompute) Type() MessageType {
 	return ComputeMsg
 }
 
+func (m *MessageCompute) String() string {
+	return m.Type().String()
+}
+
 func NewMessageCompute() Message {
 	return &MessageCompute{
 		TypeString: ComputeMsg.String(),

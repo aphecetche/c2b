@@ -39,6 +39,11 @@ func (m *MessageHandshake) Type() MessageType {
 	return HandshakeMsg
 }
 
+func (m *MessageHandshake) String() string {
+	return fmt.Sprintf("source:%s build:%s generator:%s",
+		m.SourceDirectory, m.BuildDirectory, m.Generator)
+}
+
 func NewMessageHandshake(major int64, source string, build string, generator string) Message {
 	return &MessageHandshake{
 		TypeString:      HandshakeMsg.String(),

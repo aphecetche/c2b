@@ -1,17 +1,11 @@
 package cmake
 
-// BuildConfig describe the configuration of a cmake build
-var BuildConfig = struct {
-	SourceDir string
-	BuildDir  string
-	Generator string
-	Configure []string
-	Env       []string
-}{
+var O2Config = BuildConfig{
 	BuildDir:  "/tmp/c2b-build",
 	SourceDir: "/Users/laurent/alice/o2-dev/O2",
 	Generator: "Ninja",
-	Configure: []string{"-DCMAKE_MODULE_PATH=/Users/laurent/alice/o2-dev/O2/cmake/modules;/Users/laurent/alice/sw/osx_x86-64/FairRoot/latest-clion-o2/share/fairbase/cmake/modules;/Users/laurent/alice/sw/osx_x86-64/FairRoot/latest-clion-o2/share/fairbase/cmake/modules_old",
+	Configure: []string{
+		"-DCMAKE_MODULE_PATH=/Users/laurent/alice/o2-dev/O2/cmake/modules;/Users/laurent/alice/sw/osx_x86-64/FairRoot/latest-clion-o2/share/fairbase/cmake/modules;/Users/laurent/alice/sw/osx_x86-64/FairRoot/latest-clion-o2/share/fairbase/cmake/modules_old",
 		"-DFairRoot_DIR=/Users/laurent/alice/sw/osx_x86-64/FairRoot/latest-clion-o2/",
 		"-DALICEO2_MODULAR_BUILD=ON",
 		"-DPythia6_DIR=/Users/laurent/alice/sw/osx_x86-64/pythia6/latest",

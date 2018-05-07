@@ -27,6 +27,10 @@ func (m *MessageHello) Type() MessageType {
 	return HelloMsg
 }
 
+func (m *MessageHello) String() string {
+	return m.Type().String()
+}
+
 type SupportedProtocolVersion struct {
 	IsExperimental bool  `json:"isExperimental"`
 	Major          int64 `json:"major"`

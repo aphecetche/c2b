@@ -26,6 +26,9 @@ type MessageGlobalSettings struct {
 func (m *MessageGlobalSettings) Type() MessageType {
 	return GlobalSettingsMsg
 }
+func (m *MessageGlobalSettings) String() string {
+	return m.Type().String()
+}
 
 func NewMessageGlobalSettings() Message {
 	return &MessageGlobalSettings{

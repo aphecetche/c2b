@@ -32,11 +32,23 @@ func (m *MessageSetGlobalSettings) Type() MessageType {
 	return SetGlobalSettingsMsg
 }
 
-func NewMessageSetGlobalSettings(source, build, generator string) Message {
+func (m *MessageSetGlobalSettings) String() string {
+	return fmt.Sprintf("source:%s build:%s generator:%s debug:%v",
+		m.SourceDirectory, m.BuildDirectory, m.Generator, m.DebugOutput)
+}
+
+func NewMessageSetGlobalSettingsColdStart(source, build, generator string) Message {
 	return &MessageSetGlobalSettings{
 		TypeString:      SetGlobalSettingsMsg.String(),
 		SourceDirectory: source,
 		BuildDirectory:  build,
 		Generator:       generator,
+	}
+}
+
+func NewMessageSetGlobalSettingsWarmStart(build string) Message {
+	return &MessageSetGlobalSettings{
+		TypeString:     SetGlobalSettingsMsg.String(),
+		BuildDirectory: build,
 	}
 }

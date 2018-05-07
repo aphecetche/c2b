@@ -3,6 +3,7 @@ package cmake
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 )
 
 func UnmarshalMessageConfigure(data []byte) (Message, error) {
@@ -26,6 +27,10 @@ type MessageConfigure struct {
 
 func (m *MessageConfigure) Type() MessageType {
 	return ConfigureMsg
+}
+
+func (m *MessageConfigure) String() string {
+	return strings.Join(m.CacheArguments, " ")
 }
 
 func NewMessageConfigure(cacheArguments []string) Message {

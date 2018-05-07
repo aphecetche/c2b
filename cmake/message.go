@@ -1,6 +1,7 @@
 package cmake
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 )
@@ -30,6 +31,45 @@ const (
 	CacheMsg
 	FileSystemWatchersMsg
 )
+
+func TypeFromString(s string) MessageType {
+	switch s {
+	case HelloMsg.String():
+		return HelloMsg
+	case HandshakeMsg.String():
+		return HandshakeMsg
+	case ReplyMsg.String():
+		return ReplyMsg
+	case ErrorMsg.String():
+		return ErrorMsg
+	case ProgressMsg.String():
+		return ProgressMsg
+	case MessageMsg.String():
+		return MessageMsg
+	case SignalMsg.String():
+		return SignalMsg
+	case GlobalSettingsMsg.String():
+		return GlobalSettingsMsg
+	case SetGlobalSettingsMsg.String():
+		return SetGlobalSettingsMsg
+	case ConfigureMsg.String():
+		return ConfigureMsg
+	case ComputeMsg.String():
+		return ComputeMsg
+	case CodeModelMsg.String():
+		return CodeModelMsg
+	case CTestInfoMsg.String():
+		return CTestInfoMsg
+	case CMakeInputsMsg.String():
+		return CMakeInputsMsg
+	case CacheMsg.String():
+		return CacheMsg
+	case FileSystemWatchersMsg.String():
+		return FileSystemWatchersMsg
+	default:
+		panic(fmt.Errorf("unknown message type %s", s))
+	}
+}
 
 func (msg MessageType) String() string {
 	switch msg {
@@ -73,9 +113,18 @@ func (msg MessageType) String() string {
 type Message interface {
 	Marshal() ([]byte, error)
 	Type() MessageType
+	String() string
 }
 
-func NewMessage(b []byte, msgType MessageType) (Message, error) {
+func NewMessage(b []byte) (Message, error) {
+	m, err := UnmarshalGeneric(b)
+	if err != nil {
+		return nil, err
+	}
+	return NewMessageWithType(b, TypeFromString(m.TypeString))
+}
+
+func NewMessageWithType(b []byte, msgType MessageType) (Message, error) {
 	var m Message
 	var err error
 	switch msgType {
@@ -99,6 +148,8 @@ func NewMessage(b []byte, msgType MessageType) (Message, error) {
 		m, err = UnmarshalMessageProgress(b)
 	case ErrorMsg:
 		m, err = UnmarshalMessageError(b)
+	case CodeModelMsg:
+		m, err = UnmarshalMessageCodeModel(b)
 	default:
 		return nil, fmt.Errorf("no such message type : %d", msgType)
 	}
@@ -109,12 +160,18 @@ func NewMessage(b []byte, msgType MessageType) (Message, error) {
 }
 
 func Write(m Message, w io.Writer) {
-
 	b, _ := m.Marshal()
-
 	fmt.Println("WRITE:", string(b))
-
 	msg := fmt.Sprintf("%s\n%s\n%s\n", MessageStart, string(b), MessageEnd)
-
 	w.Write([]byte(msg))
+}
+
+func UnmarshalGeneric(data []byte) (MessageGeneric, error) {
+	var r MessageGeneric
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+type MessageGeneric struct {
+	TypeString string `json:"type"`
 }
