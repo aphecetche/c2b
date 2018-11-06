@@ -239,6 +239,8 @@ func main() {
 		config = cmake.O2Config
 	case "fairlogger":
 		config = cmake.FairLoggerConfig
+	case "root":
+		config = cmake.RootConfig
 	default:
 		log.Fatalf("Unknown build config %s", *build)
 	}

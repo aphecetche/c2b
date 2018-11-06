@@ -1,0 +1,77 @@
+digraph GG {
+	node [fontsize=12];
+	node775	 [label=MIDTracking,
+		shape=polygon];
+	node1155	 [label=GeoBase,
+		shape=ellipse];
+	node775 -> node1155;
+	node738	 [label=MIDBase,
+		shape=polygon];
+	node775 -> node738;
+	node1156	 [label=ParBase,
+		shape=ellipse];
+	node775 -> node1156;
+	node1151	 [label=Tree,
+		shape=ellipse];
+	node775 -> node1151;
+	node1158	 [label=VMC,
+		shape=ellipse];
+	node775 -> node1158;
+	node1166	 [label=pthread,
+		shape=ellipse];
+	node775 -> node1166;
+	node1148	 [label=Base,
+		shape=ellipse];
+	node1160	 [label="Boost::log",
+		shape=ellipse];
+	node1161	 [label="Boost::log_setup",
+		shape=ellipse];
+	node1162	 [label="Boost::program_options",
+		shape=ellipse];
+	node1165	 [label="Boost::serialization",
+		shape=ellipse];
+	node1159	 [label="Boost::system",
+		shape=ellipse];
+	node1163	 [label="Boost::thread",
+		shape=ellipse];
+	node1152	 [label=Core,
+		shape=ellipse];
+	node1164	 [label="FairRoot::FairMQ",
+		shape=ellipse];
+	node1154	 [label=FairTools,
+		shape=ellipse];
+	node1153	 [label=GenVector,
+		shape=ellipse];
+	node1157	 [label=Geom,
+		shape=ellipse];
+	node242	 [label=DataFormatsMID,
+		shape=polygon];
+	node738 -> node242;
+	node242 -> node1148;
+	node242 -> node1160;
+	node242 -> node1161;
+	node242 -> node1162;
+	node242 -> node1165;
+	node242 -> node1159;
+	node242 -> node1163;
+	node242 -> node1152;
+	node242 -> node1164;
+	node242 -> node1154;
+	node242 -> node1153;
+	node242 -> node1157;
+	node1173	 [label=Hist,
+		shape=ellipse];
+	node242 -> node1173;
+	node1149	 [label=MathCore,
+		shape=ellipse];
+	node242 -> node1149;
+	node1177	 [label=Matrix,
+		shape=ellipse];
+	node242 -> node1177;
+	node1178	 [label=Minuit,
+		shape=ellipse];
+	node242 -> node1178;
+	node1150	 [label=RIO,
+		shape=ellipse];
+	node242 -> node1150;
+}
